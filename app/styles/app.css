@@ -180,3 +180,71 @@ shop-pay-button {
     }
   }
 }
+/* demo */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+li {
+  background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 25px;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+li:hover {
+  transform: scale(1.05);
+}
+
+h2 {
+  color: black;
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+p {
+  color: #555;
+  width: 250px;
+}
+
+img {
+  border-radius: 8px;
+  margin-top: 10px;
+  height: auto;
+}
+
+.price {
+  font-weight: bold;
+  color: #d9534f;
+  margin-right: 30px;
+}
+
+.rating {
+  color: #ffcc00;
+  
+}
+
+.one {
+  display: flex;
+  justify-content: space-between;
+}
