@@ -24,7 +24,7 @@ export const loader = async ({
 
 export default function Demo() {
   const {products} = useLoaderData<{products: Product[]}>();
-  console.log(products);
+  // console.log(products);
 
   const clothingProducts = products.filter(
     (product: Product) => product.category === 'Clothing',
