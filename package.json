@@ -21,6 +21,7 @@
   "prettier": "@shopify/prettier-config",
   "dependencies": {
     "@headlessui/react": "^1.7.2",
+    "@remix-run/cloudflare": "^2.15.3",
     "@remix-run/node": "^2.15.3",
     "@remix-run/react": "^2.15.3",
     "@remix-run/server-runtime": "^2.15.3",
