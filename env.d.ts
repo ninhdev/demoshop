@@ -31,6 +31,11 @@ declare global {
     SHOP_ID: string;
   }
 }
+interface Product {
+  id: number;
+  title: string;
+  images: string[];
+}
 
 declare module '@shopify/remix-oxygen' {
   /**
