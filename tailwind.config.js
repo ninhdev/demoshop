@@ -61,4 +61,5 @@ export default {
     },
   },
   plugins: [formsPlugin, typographyPlugin],
+  plugins: [require('@tailwindcss/line-clamp')],
 };

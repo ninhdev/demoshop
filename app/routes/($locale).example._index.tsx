@@ -1,79 +1,115 @@
-import {
-  json,
-  type LoaderFunctionArgs,
-} from '@shopify/remix-oxygen';
-import { useLoaderData } from '@remix-run/react';
-import { Link } from '~/components/Link';
-import type { Product } from '~/data/types';
-import { routeHeaders } from '~/data/cache';
+import { LoaderFunctionArgs } from '@shopify/remix-oxygen';
+import { useLoaderData, Link } from '@remix-run/react';
+import { Productcard_example } from '~/components/Productcard_example';
 
-export const headers = routeHeaders;
 
-export const loader = async ({
-  request,
-  context: { storefront },
-}: LoaderFunctionArgs) => {
-  try {
-    const response = await fetch("https://dummyjson.com/products?limit=20");
-    if (!response.ok) {
-      throw new Response("Failed to fetch data", { status: 500 });
+const PRODUCT_LIST = `#graphql
+query GetProducts($first: Int!) {
+  products(first: $first) {
+    edges {
+      node {
+        id
+        title
+        handle
+        description
+        images(first: 1) {
+          edges {
+            node {
+              url
+            }
+          }
+        }
+        variants(first: 20) {
+          edges {
+            node {
+              id
+              title
+              priceV2 {
+                amount
+              }
+            }
+          }
+        }
+      }
     }
-
-    const data: { products: Product[] } = await response.json() as {products: Product[]};
-
-    return json({ products: data.products || [] });
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    throw new Response("Internal Server Error", { status: 500 });
   }
-};
+}
+`;
 
-export default function Example() {
-  const { products } = useLoaderData<{ products: Product[] }>();
+export async function loader({ context, request }: LoaderFunctionArgs) {
+  const { products } = await context.storefront.query(PRODUCT_LIST, {
+    variables: {
+      first: 100,
+    },
+  });
+
+  return products?.edges.map((edge: any) => edge.node) || [];
+}
+
+export default function ExampleTest() {
+  const products = useLoaderData<typeof loader>();
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <h2 className="text-2xl font-bold text-center p-3">Product List</h2>
-      <div>
-        <ul className="grid grid-cols-4 gap-3 ">
-          {products.length === 0 ? (
-            <p className="text-center col-span-full">No products</p>
-          ) : (
-            products.map((product) => {
-              const discount = Math.floor(product.discountPercentage);
-              return (
-                <li
-                  key={product.id}
-                  className="w-full h-auto box-border bg-gray-50 rounded-xl leading-6 shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
-                >
-                  <div>
-                    <Link to={`/example/${product.id}`}>
-                      <img
-                        className="w-full object-cover rounded-t-xl"
-                        src={product.thumbnail ?? '/placeholder.jpg'}
-                        alt={product.title}
-                      />
-                      <p className="p-2 text-lg font-semibold truncate">
-                        {product.title}
-                      </p>
-                    </Link>
-                    <div className="flex items-center gap-2 mt-2 p-2 relative">
-                      <span className="text-red-500 font-semibold">${product.price}</span>
-                      <span className="font-bold text-red-500 bg-neutral-50">-{discount}%</span>
-                      <span className="text-sm text-gray-700 capitalize absolute right-2">
-                        {product.category}
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              );
-            })
-          )}
-        </ul>
+    <div className="px-24">
+      {/* Banner Section */}
+      <div className="relative pt-[40px]">
+        <img
+          className="w-full h-[287px] object-cover rounded-[18px]"
+          src="/images/brand-banner.png"
+          alt="banner"
+        />
+        <img
+          className="absolute right-4 top-1/2 -translate-y-1/2 -translate-x-3/4"
+          src="/images/avatar-banner.png"
+          alt="avatar-banner"
+        />
+        <p className="font-black absolute top-12 left-8 text-[#3A4980] text-3xl translate-y-3/4">
+          Grab Upto 50% Off On <br /> Selected Headphones
+        </p>
+        <button className="absolute py-[15px] px-[34px] bg-[#3A4980] rounded-[30px] text-white left-8 top-1/2 translate-y-1/2 hover:bg-[#ffffff] hover:text-[#3A4980]">
+          Buy Now
+        </button>
       </div>
-      <Link className="flex items-center justify-center hover:underline p-5" to="/">
-        Return to home page
-      </Link>
+
+      {/* Filter Section */}
+      <div className="pt-[30px] flex justify-between">
+        <div className="flex items-center gap-4">
+          {['Headphone Type', 'Price', 'Review', 'Color', 'Material'].map(
+            (filter) => (
+              <button
+              
+                key={filter}
+                className="py-[10px] px-[14px] bg-[#EBEDEC] rounded-[28px] cursor-pointer">
+                {filter}
+              </button>
+            )
+          )}
+        </div>
+
+        <button className="py-[10px] px-[14px] bg-[#FFFFFF] rounded-[28px] cursor-pointer border-[1px] border-[#E0E0E0]">
+          Headphone Type
+        </button>
+      </div>
+
+      {/* Product List */}
+      <div className="pt-[30px] grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {products.map((product) => (
+          <Link
+            to={`/example/${product.handle}`}
+            key={product.handle}
+            className="w-full h-full flex justify-between items-center"
+          >
+            <Productcard_example
+              id={product.id}
+              title={product.title}
+              image={product.images.edges[0]?.node.url || 'Not Found'}
+              priceV2={product.variants.edges[0]?.node.priceV2.amount}
+              description={product.description}
+              handle={product.handle}
+            />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

@@ -678,12 +678,28 @@ export type CollectionsQuery = {
   };
 };
 
-export type ProductlistQueryVariables = StorefrontAPI.Exact<{
-  [key: string]: never;
+export type GetProductsQueryVariables = StorefrontAPI.Exact<{
+  first: StorefrontAPI.Scalars['Int']['input'];
 }>;
 
-export type ProductlistQuery = {
-  products: {nodes: Array<Pick<StorefrontAPI.Product, 'title' | 'handle'>>};
+export type GetProductsQuery = {
+  products: {
+    edges: Array<{
+      node: Pick<
+        StorefrontAPI.Product,
+        'id' | 'title' | 'handle' | 'description'
+      > & {
+        images: {edges: Array<{node: Pick<StorefrontAPI.Image, 'url'>}>};
+        variants: {
+          edges: Array<{
+            node: Pick<StorefrontAPI.ProductVariant, 'id' | 'title'> & {
+              priceV2: Pick<StorefrontAPI.MoneyV2, 'amount'>;
+            };
+          }>;
+        };
+      };
+    }>;
+  };
 };
 
 export type FeaturedItemsQueryVariables = StorefrontAPI.Exact<{
@@ -1411,9 +1427,9 @@ interface GeneratedQueryTypes {
     return: CollectionsQuery;
     variables: CollectionsQueryVariables;
   };
-  '#graphql\n  query productlist\n   {\n\n  products(first:10) {\n  \t\tnodes{\n        title\n        handle\n      }\n  }\n}\n': {
-    return: ProductlistQuery;
-    variables: ProductlistQueryVariables;
+  '#graphql\nquery GetProducts($first: Int!) {\n  products(first: $first) {\n    edges {\n      node {\n        id\n        title\n        handle\n        description\n        images(first: 1) {\n          edges {\n            node {\n              url\n            }\n          }\n        }\n        variants(first: 20) {\n          edges {\n            node {\n              id\n              title\n              priceV2 {\n                amount\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n': {
+    return: GetProductsQuery;
+    variables: GetProductsQueryVariables;
   };
   '#graphql\n  query FeaturedItems(\n    $country: CountryCode\n    $language: LanguageCode\n    $pageBy: Int = 12\n  ) @inContext(country: $country, language: $language) {\n    featuredCollections: collections(first: 3, sortKey: UPDATED_AT) {\n      nodes {\n        ...FeaturedCollectionDetails\n      }\n    }\n    featuredProducts: products(first: $pageBy) {\n      nodes {\n        ...ProductCard\n      }\n    }\n  }\n\n  #graphql\n  fragment ProductCard on Product {\n    id\n    title\n    publishedAt\n    handle\n    vendor\n    variants(first: 1) {\n      nodes {\n        id\n        availableForSale\n        image {\n          url\n          altText\n          width\n          height\n        }\n        price {\n          amount\n          currencyCode\n        }\n        compareAtPrice {\n          amount\n          currencyCode\n        }\n        selectedOptions {\n          name\n          value\n        }\n        product {\n          handle\n          title\n        }\n      }\n    }\n  }\n\n  #graphql\n  fragment FeaturedCollectionDetails on Collection {\n    id\n    title\n    handle\n    image {\n      altText\n      width\n      height\n      url\n    }\n  }\n\n': {
     return: FeaturedItemsQuery;
