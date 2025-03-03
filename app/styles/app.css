@@ -183,7 +183,7 @@ shop-pay-button {
 /* demo */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #ffff;
   margin: 0;
   padding: 20px;
 }
@@ -193,28 +193,39 @@ h1 {
   color: #333;
 }
 
-ul {
+.pro {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cột */
+}
+.container {
   list-style-type: none;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  margin: auto;
+  max-width: 1280px;
 }
-
+.container1 {
+  list-style-type: none;
+  padding: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 250px;
+}
 li {
-  background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin: 25px;
   padding: 20px;
-  width: 300px;
+  width: 305px;
+  height: 488px;
   text-align: center;
   transition: transform 0.2s;
+
+  border: 2px solid #f3f5f9 !important;
 }
 
-li:hover {
+/* li:hover {
   transform: scale(1.05);
-}
+} */
 
 h2 {
   color: black;
@@ -236,15 +247,22 @@ img {
 .price {
   font-weight: bold;
   color: #d9534f;
-  margin-right: 30px;
 }
 
 .rating {
   color: #ffcc00;
-  
 }
 
 .one {
   display: flex;
   justify-content: space-between;
+}
+.main {
+  max-width: 1500px;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
 }

@@ -27,6 +27,7 @@
     "@remix-run/server-runtime": "^2.15.3",
     "@shopify/cli": "^3.74.1",
     "@shopify/hydrogen": "^2025.1.1",
+    "@shopify/hydrogen-react": "^2025.1.2",
     "@shopify/remix-oxygen": "^2.0.10",
     "clsx": "^1.2.1",
     "cross-env": "^7.0.3",

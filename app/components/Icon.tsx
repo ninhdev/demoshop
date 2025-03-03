@@ -58,6 +58,54 @@ export function IconClose(props: IconProps) {
   );
 }
 
+export function IconHeart(props: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="26"
+      height="26"
+      viewBox="0 0 26 26"
+      {...props}
+    >
+      <path
+        d="M22.1763 5.51296C21.6519 4.98834 21.0293 4.57217 20.344 4.28823C19.6588 4.0043 18.9243 3.85815 18.1825 3.85815C17.4408 3.85815 16.7063 4.0043 16.021 4.28823C15.3358 4.57217 14.7132 4.98834 14.1888 5.51296L13.1005 6.60123L12.0123 5.51296C10.9531 4.45376 9.51648 3.8587 8.01854 3.8587C6.5206 3.8587 5.08401 4.45376 4.0248 5.51296C2.9656 6.57217 2.37054 8.00875 2.37054 9.50669C2.37054 11.0046 2.9656 12.4412 4.0248 13.5004L5.11307 14.5887L13.1005 22.5762L21.088 14.5887L22.1763 13.5004C22.7009 12.9761 23.1171 12.3535 23.401 11.6682C23.6849 10.9829 23.8311 10.2484 23.8311 9.50669C23.8311 8.76494 23.6849 8.03045 23.401 7.3452C23.1171 6.65994 22.7009 6.03734 22.1763 5.51296V5.51296Z"
+        stroke="inherit"
+        fill="inherit"
+        strokeWidth="2.156"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+export function IconFrame({props}: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="25"
+      viewBox="0 0 14 15"
+      fill="none"
+    >
+      <path
+        d="M11.375 5.3125L7 9.6875L2.625 5.3125"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+      <path
+        d="M11.375 5.3125L7 9.6875L2.625 5.3125"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function IconArrow({direction = 'right'}: IconProps) {
   let rotate;
 
