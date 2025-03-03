@@ -145,6 +145,8 @@ export default function Collection() {
   const {collection, collections, appliedFilters} =
     useLoaderData<typeof loader>();
 
+  console.log('test');
+
   const {ref, inView} = useInView();
 
   return (
