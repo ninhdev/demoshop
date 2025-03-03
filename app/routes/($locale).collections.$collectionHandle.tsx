@@ -146,6 +146,7 @@ export default function Collection() {
     useLoaderData<typeof loader>();
 
   console.log('test');
+  console.log('tick');
 
   const {ref, inView} = useInView();
 
