@@ -312,3 +312,7 @@ export function isLocalPath(url: string) {
 
   return false;
 }
+//remix 
+export function formatTitle(title:string){
+  return title.toLowerCase().split(" ").join("-")
+}
