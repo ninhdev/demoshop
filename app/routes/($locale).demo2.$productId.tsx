@@ -114,7 +114,12 @@ export default function ProductDetail() {
           </div>
           {/* ảnh, giá */}
           <div className="w-full md:w-1/2">
-            <p className="text-2xl md:text-3xl font-bold">{product.title}</p>
+            <p
+              className="text-2xl md:text-3xl font-bold"
+              style={{fontFamily: 'Recoleta, serif'}}
+            >
+              {product.title}
+            </p>
             <p className="text-md md:text-lg font-semibold text-gray-500 mt-5">
               ⭐ {product.rating} (288 reviews)
             </p>
@@ -197,6 +202,39 @@ export default function ProductDetail() {
                 Add to cart
               </button>
             </div>
+            {/* heart and iconV */}
+            <div className="flex flex-wrap gap-7">
+              <div className="mt-5 flex gap-3 w-full sm:w-auto">
+                <IconHeart className="two text-white stroke-black fill-white" />
+                <strong className="text-sm">Add to wishlist</strong>
+              </div>
+
+              <div className="mt-1 flex items-center gap-3 w-full sm:w-auto">
+                <div className="w-6 h-6 flex items-center justify-center bg-red-100 rounded-full">
+                  <IconV className="w-4 h-4 text-red-500" />
+                </div>
+                <strong className="text-black text-sm">
+                  30 days money back guarantee
+                </strong>
+              </div>
+            </div>
+            {/* tab */}
+            <div className="bg-gray-100 rounded-full p-1 flex gap-2 w-max mt-5">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  className={`px-4 py-2 text-black rounded-full transition ${
+                    activeTab === tab
+                      ? 'bg-white shadow-md'
+                      : 'hover:bg-gray-200'
+                  }`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+            <hr className="border-gray-300 my-4" />
             <hr className="border-gray-300 my-4" />
             <div className="flex justify-between items-center">
               <strong>KEY FEATURES</strong>
@@ -261,7 +299,9 @@ export default function ProductDetail() {
       <div className="">
         <div className="text-center ">
           {' '}
-          <strong className="text-3xl ">Reviews & Rating</strong>
+          <strong className="text-3xl" style={{fontFamily: 'Recoleta, serif'}}>
+            Reviews & Rating
+          </strong>
         </div>
         <div className="max-w-[1280px] mx-auto ">
           {/* cột review1 */}
@@ -481,7 +521,9 @@ export default function ProductDetail() {
       </div>
       {/* Want to know more? */}
       <div className="text-center mt-10 ">
-        <strong className="text-3xl">Want to know more?</strong>
+        <strong className="text-3xl" style={{fontFamily: 'Recoleta, serif'}}>
+          Want to know more?
+        </strong>
       </div>
       <div className="flex flex-col items-center">
         <div className="border-b py-3 flex justify-between items-center w-full max-w-[600px]">
