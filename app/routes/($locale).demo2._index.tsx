@@ -1,6 +1,7 @@
 import {Link, useParams} from '@remix-run/react';
 import React, {useEffect, useState} from 'react';
 import {IconFrame, IconHeart} from '~/components/Icon';
+import {ChevronLeft, ChevronRight} from 'lucide-react';
 interface Product {
   id: number;
   title: string;
@@ -55,6 +56,7 @@ const Products: React.FC = () => {
   //nếu không dùng thì sẽ thành 3 trang và mất đi bớt sản phẩm
   const totalPages = Math.ceil(products.length / productsPages);
   const {locale} = useParams();
+
   return (
     <div className="container">
       <div className="main">

@@ -1,7 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@font-face {
+  font-family: "Recoleta";
+  src: url("/fonts/Recoleta-Regular.woff2") format("woff2"),
+       url("/fonts/Recoleta-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 /* Tokens */
 :root {
   --color-primary: 20 20 20; /* Text, buttons, etc. */
@@ -222,11 +228,6 @@ li {
 
   border: 2px solid #f3f5f9 !important;
 }
-
-/* li:hover {
-  transform: scale(1.05);
-} */
-
 h2 {
   color: black;
   margin: 10px 0;
@@ -235,7 +236,6 @@ h2 {
 
 p {
   color: #555;
-  width: 250px;
 }
 
 img {
