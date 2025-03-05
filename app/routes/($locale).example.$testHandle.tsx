@@ -1,101 +1,121 @@
-// import { LoaderFunctionArgs } from '@shopify/remix-oxygen';
-// import { useLoaderData } from '@remix-run/react';
-// import { Link } from '@remix-run/react';
-// import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// const PRODUCT_LIST = `#graphql
-//   query ProductListByHandle($handle: String!) {
-//     productByHandle(handle: $handle) {
-//       id
-//       title
-//       description
-//       handle
-//       priceRange {
-//         minVariantPrice {
-//           amount
-//         }
-//       }
-//       images(first: 20) {
-//         nodes {
-//           url
-//           altText
-//         }
-//       }
-//     }
-//   }
-// `;
+import { useLoaderData } from "@remix-run/react";
+import {  json, LoaderFunctionArgs } from "@shopify/remix-oxygen";
+import { routeHeaders } from '~/data/cache';
 
-// export async function loader({ context }: LoaderFunctionArgs) {
-//   const handle = "the-hosted-snowboard"; 
-//   const { productByHandle } = await context.storefront.query(PRODUCT_LIST, {
-//     variables: { handle },
-//   });
+export const headers = routeHeaders;
 
-//   console.log(productByHandle);
+const PRODUCT_QUERY = `#graphql
+  query ProductQuery(
+    $country: CountryCode
+    $language: LanguageCode
+    $handle: String!
+  ) @inContext(country: $country, language: $language) {
+    product(handle: $handle) {
+      id
+      title
+      description
+      images(first: 5) {
+        nodes {
+          url
+          altText
+        }
+      }
+      availableForSale
+      variants(first: 5) {
+        nodes {
+          id
+          title
+          price {
+            amount
+          }
+        }
+      }
+    }
+  }   
+`;
+interface Image {
+  url: string;
+  altText?: string;
+}
+interface Product {
+  title: string;
+  description: string;
+  availableForSale: boolean;
+  images: {
+    nodes: Image[];
+  };
+}
+export async function loader({ context, params, request, }: LoaderFunctionArgs) {
+  const { testHandle } = params;
 
-//   return productByHandle ? [productByHandle] : [];
-// }
+  if (!testHandle) {
+    throw new Response("Handle not provided", { status: 404 });
+  }
 
-// export default function ExampleTest() {
-//   const products = useLoaderData<typeof loader>();
+  const [{ product }] = await Promise.all([
+    context.storefront.query(PRODUCT_QUERY, {
+      variables: {
+        handle: testHandle,
+        country: context.storefront.i18n.country,
+        language: context.storefront.i18n.language,
+      },
+    }),
+    // Add other queries here, so that they are loaded in parallel
+  ]);
 
-//   return (
-//     <div>
-//       <div className="px-24">
-//         {/* Banner Section */}
-//         <div className="relative pt-[40px]">
-//           <img
-//             className="w-full h-[287px] object-cover rounded-[18px]"
-//             src="/images/brand-banner.png"
-//             alt="banner"
-//           />
-//           <img
-//             className="absolute right-4 top-1/2 -translate-y-1/2 -translate-x-3/4"
-//             src="/images/avatar-banner.png"
-//             alt="avatar-banner"
-//           />
+  if (!product) {
+    throw new Response("Product not found", { status: 404 });
+  }
 
-//           <p className="font-black absolute top-12 left-8 text-[#3A4980] text-3xl translate-y-3/4">
-//             Grab Upto 50% Off On <br /> Selected Headphones
-//           </p>
-//           <button className="absolute py-[15px] px-[34px] bg-[#3A4980] rounded-[30px] text-white left-8 top-1/2 translate-y-1/2 hover:bg-[#ffffff] hover:text-[#3A4980]">
-//             Buy Now
-//           </button>
-//         </div>
+  return{ product };
+}
 
-//         {/* Filter Section */}
-//         <div className="pt-[30px] flex justify-between">
-//           <div className="flex items-center gap-4">
-//             {["Headphone type", "Price", "Review", "Color", "Material", "Offer"].map(
-//               (label) => (
-//                 <button
-//                   key={label}
-//                   className="py-[10px] px-[14px] bg-[#EBEDEC] rounded-[28px] cursor-pointer"
-//                 >
-                  
-//                 </button>
-//               )
-//             )}
-//           </div>
+export function ProductDetail() {
+  const { product } = useLoaderData<typeof loader>();
+  // console.log(product)
 
-//           <div>
-//             <button className="py-[10px] px-[14px] bg-[#FFFFFF] rounded-[28px] cursor-pointer border-[1px] border-[#E0E0E0]">
-//               Headphone Type 
-//             </button>
-//           </div>
-//         </div>
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">{product.title}</h1>
+      <p className="text-gray-600 mb-4">{product.description}</p>
 
-//         {/* Product List */}
-//         <h1>Product List</h1>
-//         <ul>
-//           {products.map((product) => (
-//             <li key={product.id}>
-//               <Link to={`/example/${product.handle}`}>{product.title}</Link>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     </div>
-//   );
-// }
+      {product.availableForSale ? (
+        <p className="text-green-600 mt-2">In stock</p>
+      ) : (
+        <p className="text-red-600 mt-2">Out of stock</p>
+      )}
+      <div className="mt-6">
+        {product.images.nodes.map((image: Image) => (
+          <div key={image.url}>
+            <img src={image.url} alt={image.altText ?? 'Product image'} />
+          </div>
+        ))}
+      </div>
+
+
+
+    </div>
+  );
+
+  // return (
+  // <></>
+  // // <div className="">
+  //   <h1 className="">{product.title}</h1>
+  //   <p className="">{product.description}</p>
+
+  //   {product.availableForSale ? (
+  //     <p className="text-green-600 mt-2">In stock</p>
+  //   ) : (
+  //     <p className="text-red-600 mt-2">Out of stock</p>
+  //   )}
+  //   {/* <ProductGallery_Example product={product}/> */}
+  //   {product.images.nodes.map((image, index) => (
+  //     <div key={index}>
+  //       <img src={product.images.nodes.url} 
+  //       alt={product.images.nodes[0].altText ?? ''} />
+  //     </div>
+  //   ))} 
+  // </div>
+
+}
