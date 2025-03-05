@@ -31,6 +31,7 @@ import {NotFound} from '~/components/NotFound';
 import favicon from '~/assets/favicon.svg';
 import {seoPayload} from '~/lib/seo.server';
 import styles from '~/styles/app.css?url';
+import slide from '~/styles/slide.css?url';
 
 import {DEFAULT_LOCALE, parseMenu} from './lib/utils';
 
@@ -151,6 +152,8 @@ function Layout({children}: {children?: React.ReactNode}) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="msvalidate.01" content="A352E6A0AF9A652267361BBB572B8468" />
         <link rel="stylesheet" href={styles}></link>
+        <link rel="stylesheet" href={slide}></link>
+
         <Meta />
         <Links />
       </head>

@@ -96,6 +96,20 @@ export function IconV(props: any) {
     </svg>
   );
 }
+export function IconDot(props: any) {
+  return (
+    <svg className="embla__dot" viewBox="0 0 24 24">
+      <circle
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="gray"
+        stroke-width="2"
+        fill="none"
+      />
+    </svg>
+  );
+}
 export function IconFrame({props}: any) {
   return (
     <svg
