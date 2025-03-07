@@ -76,3 +76,44 @@ const PRODUCTS_QUERY = `#graphql
     }
   }
 `;
+const SHOE_QUERY=`#graphql
+query Shoe {
+  products(first: 20) {
+  nodes {
+    id
+  title
+  publishedAt
+  handle
+  vendor
+  variants(first: 1) {
+    nodes {
+      id
+      availableForSale
+      image {
+        url
+        altText
+        width
+        height
+      }
+      price {
+        amount
+        currencyCode
+      }
+      compareAtPrice {
+        amount
+        currencyCode
+      }
+      selectedOptions {
+        name
+        value
+      }
+      product {
+        handle
+        title
+      }
+    }
+  }
+  }
+}
+}
+`

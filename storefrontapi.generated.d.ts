@@ -1381,6 +1381,40 @@ export type ProductsQuery = {
   };
 };
 
+export type ShoeQueryVariables = StorefrontAPI.Exact<{[key: string]: never}>;
+
+export type ShoeQuery = {
+  products: {
+    nodes: Array<
+      Pick<
+        StorefrontAPI.Product,
+        'id' | 'title' | 'publishedAt' | 'handle' | 'vendor'
+      > & {
+        variants: {
+          nodes: Array<
+            Pick<StorefrontAPI.ProductVariant, 'id' | 'availableForSale'> & {
+              image?: StorefrontAPI.Maybe<
+                Pick<
+                  StorefrontAPI.Image,
+                  'url' | 'altText' | 'width' | 'height'
+                >
+              >;
+              price: Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>;
+              compareAtPrice?: StorefrontAPI.Maybe<
+                Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
+              >;
+              selectedOptions: Array<
+                Pick<StorefrontAPI.SelectedOption, 'name' | 'value'>
+              >;
+              product: Pick<StorefrontAPI.Product, 'handle' | 'title'>;
+            }
+          >;
+        };
+      }
+    >;
+  };
+};
+
 export type ShopproductQueryVariables = StorefrontAPI.Exact<{
   handle: StorefrontAPI.Scalars['String']['input'];
 }>;
@@ -1490,6 +1524,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  query Products {\n    shop {\n      name\n      id\n      description\n      moneyFormat\n      brand {\n        slogan\n        shortDescription\n      }\n    }\n  }\n': {
     return: ProductsQuery;
     variables: ProductsQueryVariables;
+  };
+  '#graphql\nquery Shoe {\n  products(first: 20) {\n  nodes {\n    id\n  title\n  publishedAt\n  handle\n  vendor\n  variants(first: 1) {\n    nodes {\n      id\n      availableForSale\n      image {\n        url\n        altText\n        width\n        height\n      }\n      price {\n        amount\n        currencyCode\n      }\n      compareAtPrice {\n        amount\n        currencyCode\n      }\n      selectedOptions {\n        name\n        value\n      }\n      product {\n        handle\n        title\n      }\n    }\n  }\n  }\n}\n}\n': {
+    return: ShoeQuery;
+    variables: ShoeQueryVariables;
   };
   '#graphql\nquery Shopproduct($handle: String!) {\n  product(handle: $handle) {\n    title\n    handle\n  }\n}': {
     return: ShopproductQuery;
