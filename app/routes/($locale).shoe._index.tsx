@@ -10,49 +10,49 @@ import 'swiper/css/pagination';
 import {IconHeart} from '~/components/Icon';
 import {Link} from '~/components/Link';
 import {json, LoaderFunctionArgs} from '@remix-run/server-runtime';
-import {useLoaderData} from '@remix-run/react';
+import {useLoaderData, useParams} from '@remix-run/react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-interface ShoeData {
-  products: {
-    nodes: {
-      id: string;
-      title: string;
-      publishedAt: string;
-      handle: string;
-      vendor: string;
-      variants: {
-        nodes: {
-          id: string;
-          availableForSale: boolean;
-          image: {
-            url: string;
-            altText?: string;
-            width: number;
-            height: number;
-          };
-          price: {
-            amount: string;
-            currencyCode: string;
-          };
-          compareAtPrice?: {
-            amount: string;
-            currencyCode: string;
-          };
-          selectedOptions: {
-            name: string;
-            value: string;
-          }[];
-          product: {
-            handle: string;
-            title: string;
-          };
-        }[];
-      };
-    }[];
-  };
-}
+// interface ShoeData {
+//   products: {
+//     nodes: {
+//       id: string;
+//       title: string;
+//       publishedAt: string;
+//       handle: string;
+//       vendor: string;
+//       variants: {
+//         nodes: {
+//           id: string;
+//           availableForSale: boolean;
+//           image: {
+//             url: string;
+//             altText?: string;
+//             width: number;
+//             height: number;
+//           };
+//           price: {
+//             amount: string;
+//             currencyCode: string;
+//           };
+//           compareAtPrice?: {
+//             amount: string;
+//             currencyCode: string;
+//           };
+//           selectedOptions: {
+//             name: string;
+//             value: string;
+//           }[];
+//           product: {
+//             handle: string;
+//             title: string;
+//           };
+//         }[];
+//       };
+//     }[];
+//   };
+// }
 export const loader = async ({
   request,
   context: {storefront},
@@ -102,7 +102,7 @@ const BannerSlider = () => {
   ];
   const {data} = useLoaderData<typeof loader>();
   console.log(data);
-
+  const {locale} = useParams();
   return (
     <div className="container">
       <div className="relative w-full max-w-[1280px] mx-auto">
@@ -115,52 +115,56 @@ const BannerSlider = () => {
           pagination={{clickable: true}}
           autoplay={{delay: 3000}}
           loop
-          className="rounded-lg shadow-lg"
+          className="rounded-lg "
         >
           {banners.map((banner, index) => (
             <SwiperSlide key={index} className="flex justify-center">
               <img
                 src={banner}
                 alt={`Banner ${index + 1}`}
-                className="w-full max-h-[500px] object-cover rounded-lg"
+                className="w-full max-h-[500px] object-cover"
               />
             </SwiperSlide>
           ))}
         </Swiper>
 
         {/* mũi tên */}
-        <button className="custom-prev hidden absolute left-5 top-1/2 -translate-y-1/2  p-3 rounded-full text-white z-10">
-          <ChevronLeft size={50} />
+        <button className="custom-prev hidden absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full text-white z-10">
+          <ChevronLeft size={30} className="sm:size-50" />
         </button>
-        <button className="custom-next hidden absolute right-5 top-1/2 -translate-y-1/2 p-3 rounded-full text-white z-10">
-          <ChevronRight size={50} />
+        <button className="custom-next hidden absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full text-white z-10">
+          <ChevronRight size={30} className="sm:size-50" />
         </button>
       </div>
-      <div className="text-3xl mt-10 mb-7">
-        {' '}
-        <strong className="">TOP COLLECTION</strong>
+      <div className="flex items-center justify-between mb-4 mt-10">
+        <h3 className="whitespace-pre-wrap text-xl md:text-2xl font-bold text-heading3">
+          TOP COLLECTIONS
+        </h3>
+        <a className="underline" data-discover="true" href="/collections">
+          View All
+        </a>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mt-10 mb-10 max-w-[1280px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[2rem] mt-10 mb-10 max-w-[1280px] mx-auto">
         {collections.map((item, index) => (
           <div
             key={index}
-            className="relative"
-            style={{width: '300px', height: '400px'}}
+            className="relative mx-auto w-full max-w-[300px] h-[200px] sm:h-[400px]"
           >
             <img
               src={item.image}
               alt={item.title}
-              className="w-full h-full object-cover rounded-lg m-0"
+              className="w-full h-full object-cover rounded-lg"
             />
-            <div className="absolute inset-0 flex items-center justify-center text-white bg-black/30">
+            <div className="absolute inset-0 flex items-center justify-center text-white ">
               {item.title}
             </div>
           </div>
         ))}
       </div>
+
       {/* NEW ARRIVALS */}
       <div className="text-center mt-10 ">
-        <strong className="text-[25px] mt-10 block">NEW ARRIVALS</strong>
+        <h2 className="text-[25px] mt-10 block">NEW ARRIVALS</h2>
 
         <div className="flex justify-center gap-10 mb-10">
           {['Men', 'Women', 'Accessories'].map((tab) => (
@@ -178,6 +182,7 @@ const BannerSlider = () => {
           ))}
         </div>
       </div>
+
       {/* listpro */}
       <div className="relative">
         <Swiper
@@ -202,13 +207,13 @@ const BannerSlider = () => {
             const firstVariant = product.variants?.nodes?.[0];
             return (
               <SwiperSlide key={product.id}>
-                <div className="flex flex-col bg-white shadow-lg rounded-lg p-2">
-                  <Link to={`/demo2/${product.id}`}>
+                <div className="flex flex-col bg-white rounded-lg p-2 border border-solid border-gray-300">
+                  <Link to={`/${locale}/demo2/${product.id}`}>
                     <div className="relative " style={{color: '#F7F5F7'}}>
                       <img
                         src={firstVariant?.image?.url ?? '/placeholder.jpg'}
                         alt={product.title}
-                        className="object-cover w-full h-[244px] rounded-lg bg-[#F7F5F7]"
+                        className="object-cover w-full h-[244px] rounded-lg bg-[#F7F5F7] "
                       />
                     </div>
                   </Link>
@@ -222,7 +227,7 @@ const BannerSlider = () => {
                           className="two stroke-gray hover:stroke-red-600 fill-none hover:fill-red-600 transition-all mt-3"
                           stroke="gray"
                         />
-                        <CircleCheckBig className="mt-3 text-gray " />
+                        <CircleCheckBig className="mt-3 text-gray-400 " />
                       </div>
                     </div>
 
@@ -248,10 +253,10 @@ const BannerSlider = () => {
         </Swiper>
 
         {/* Nút điều hướng tùy chỉnh */}
-        <button className="custom-prev absolute left-5 top-1/2 -translate-y-1/2 p-3  shadow-lg text-black z-10">
+        <button className="custom-prev absolute left-5 top-1/2 -translate-y-1/2 p-3 text-black z-10">
           <ChevronLeft size={30} />
         </button>
-        <button className="custom-next absolute right-5 top-1/2 -translate-y-1/2 p-3 shadow-lg text-black z-10">
+        <button className="custom-next absolute right-5 top-1/2 -translate-y-1/2 p-3 text-black z-10">
           <ChevronRight size={30} />
         </button>
       </div>
@@ -267,9 +272,16 @@ const BannerSlider = () => {
         <img src="../../public/image/image.webp" alt="" />
       </div>
       {/* FEATURED BRANDS */}
-      <strong>FEATURED BRANDS</strong>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="whitespace-pre-wrap text-xl md:text-2xl font-bold uppercase text-heading3">
+          FEATURED BRANDS
+        </h2>
+        <a className="underline" data-discover="true" href="/pages/brands">
+          View All Brand
+        </a>
+      </div>
       {/* brands */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+      <div className="grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid gap-4 md:gap-6 items-center p-6">
         {brands.map((brand, index) => (
           <div key={index} className="text-center">
             <img
@@ -283,7 +295,14 @@ const BannerSlider = () => {
       </div>
       {/* LATEST NEWS */}
 
-      <strong>LATEST NEWS</strong>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="whitespace-pre-wrap text-xl md:text-2xl font-bold uppercase text-heading3">
+          LATEST NEWS
+        </h2>
+        <a className="underline" data-discover="true" href="/journal">
+          View All
+        </a>
+      </div>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
         {news.map((item, index) => (
           <div key={index} className="text-center">

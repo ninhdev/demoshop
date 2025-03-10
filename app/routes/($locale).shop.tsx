@@ -19,16 +19,12 @@ export const loader = async ({
   context: {storefront},
 }: LoaderFunctionArgs) => {
   const data = await storefront.query(PRODUCTS_QUERY);
-
   return json({data});
 };
 
 export default function ProductsPage() {
   const {data} = useLoaderData<typeof loader>();
   console.log(data);
-
-  // return null;
-
   return (
     <div>
       <h1>danh sách sản phẩm</h1>
@@ -76,8 +72,7 @@ const PRODUCTS_QUERY = `#graphql
     }
   }
 `;
-const SHOE_QUERY=`#graphql
-query Shoe {
+
   products(first: 20) {
   nodes {
     id
@@ -114,6 +109,5 @@ query Shoe {
     }
   }
   }
-}
 }
 `

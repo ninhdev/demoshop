@@ -219,7 +219,7 @@ h1 {
 }
 li {
   border-radius: 12px;
-  margin: 25px;
+  /* margin: 25px; */
   padding: 20px;
   width: 305px;
   height: 388px;

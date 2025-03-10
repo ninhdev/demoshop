@@ -1366,21 +1366,6 @@ export type PaginatedProductsSearchQuery = {
   };
 };
 
-export type ProductsQueryVariables = StorefrontAPI.Exact<{
-  [key: string]: never;
-}>;
-
-export type ProductsQuery = {
-  shop: Pick<
-    StorefrontAPI.Shop,
-    'name' | 'id' | 'description' | 'moneyFormat'
-  > & {
-    brand?: StorefrontAPI.Maybe<
-      Pick<StorefrontAPI.Brand, 'slogan' | 'shortDescription'>
-    >;
-  };
-};
-
 export type ShoeQueryVariables = StorefrontAPI.Exact<{[key: string]: never}>;
 
 export type ShoeQuery = {
@@ -1521,11 +1506,7 @@ interface GeneratedQueryTypes {
     return: PaginatedProductsSearchQuery;
     variables: PaginatedProductsSearchQueryVariables;
   };
-  '#graphql\n  query Products {\n    shop {\n      name\n      id\n      description\n      moneyFormat\n      brand {\n        slogan\n        shortDescription\n      }\n    }\n  }\n': {
-    return: ProductsQuery;
-    variables: ProductsQueryVariables;
-  };
-  '#graphql\nquery Shoe {\n  products(first: 20) {\n  nodes {\n    id\n  title\n  publishedAt\n  handle\n  vendor\n  variants(first: 1) {\n    nodes {\n      id\n      availableForSale\n      image {\n        url\n        altText\n        width\n        height\n      }\n      price {\n        amount\n        currencyCode\n      }\n      compareAtPrice {\n        amount\n        currencyCode\n      }\n      selectedOptions {\n        name\n        value\n      }\n      product {\n        handle\n        title\n      }\n    }\n  }\n  }\n}\n}\n': {
+  '#graphql\nquery Shoe {\n  products(first: 50) {\n  nodes {\n    id\n  title\n  publishedAt\n  handle\n  vendor\n  variants(first: 1) {\n    nodes {\n      id\n      availableForSale\n      image {\n        url\n        altText\n        width\n        height\n      }\n      price {\n        amount\n        currencyCode\n      }\n      compareAtPrice {\n        amount\n        currencyCode\n      }\n      selectedOptions {\n        name\n        value\n      }\n      product {\n        handle\n        title\n      }\n    }\n  }\n  }\n}\n}\n': {
     return: ShoeQuery;
     variables: ShoeQueryVariables;
   };

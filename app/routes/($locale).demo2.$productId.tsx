@@ -1,20 +1,10 @@
 import {json, useLoaderData} from '@remix-run/react';
 import {LoaderFunction} from '@remix-run/node';
 import {useRef, useState} from 'react';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {Navigation, Thumbs} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import {
-  IconFrame1,
-  IconHeart,
-  IconIn,
-  IconLeft,
-  IconOn,
-  IconRight,
-  IconV,
-} from '~/components/Icon';
+import {IconFrame1, IconHeart, IconIn, IconOn, IconV} from '~/components/Icon';
 import EmblaCarousel from '~/components/EmblaCarrousel';
 
 interface Product {
@@ -68,22 +58,6 @@ export default function ProductDetail() {
   //mũi tên trái phải ảnh
   const [selectedIndex, setSelectedIndex] = useState(0);
   const images = product.images;
-
-  const handlePrev = () => {
-    setSelectedIndex((prevIndex) => {
-      const newIndex = prevIndex === 0 ? images.length - 1 : prevIndex - 1;
-      setSelectedImage(images[newIndex]);
-      return newIndex;
-    });
-  };
-
-  const handleNext = () => {
-    setSelectedIndex((prevIndex) => {
-      const newIndex = prevIndex === images.length - 1 ? 0 : prevIndex + 1;
-      setSelectedImage(images[newIndex]);
-      return newIndex;
-    });
-  };
   //
   const [activeTab, setActiveTab] = useState('Details');
   const tabs = ['Details', 'Packaging', 'Shipping details'];
@@ -94,31 +68,7 @@ export default function ProductDetail() {
         <div className="mx-auto p-6 bg-white rounded-lg flex flex-col sm:flex-col md:flex-row gap-8 mt-10 justify-center">
           {/* c1:ảnh sản phẩm */}
           <div className="w-full md:w-1/2">
-            {/* <img
-              src={selectedImage}
-              alt={product.title}
-              className="w-full md:w-[500px] h-[440px] object-cover rounded-lg"
-            /> */}
             <EmblaCarousel slides={product.images} />
-            {/* <div className="flex gap-2 justify-center">
-              <button onClick={handlePrev} >
-                <IconLeft className="w-6 h-6 text-gray-500" />
-              </button>
-              {product.images.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt="thumbnail"
-                  className={`rounded-lg cursor-pointer border w-[80px] md:w-[120px] h-[80px] md:h-[100px] mt-5 gap-7 ${
-                    selectedImage === img ? 'border-green-500' : ''
-                  }`}
-                  onClick={() => setSelectedImage(img)}
-                />
-              ))}
-              <button onClick={handleNext}>
-                <IconRight className="w-6 h-6 text-gray-500" />
-              </button>
-            </div> */}
           </div>
 
           {/* ảnh, giá */}
