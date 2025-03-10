@@ -82,7 +82,7 @@ export default function ProductDetail() {
             <p className="text-[2rem] font-semibold text-gray-500 mt-5">
               ⭐ {product.rating} (288 reviews)
             </p>
-            <p className="text-[2.5rem] md:text-2xl font-bold text-green-600 mt-5">
+            <p className="text-[2.5rem] md:text-[2.5rem] font-bold text-green-600 mt-5">
               ${product.price}
             </p>
             <hr className="border-gray-300 my-4" />
@@ -91,7 +91,7 @@ export default function ProductDetail() {
 
             {/* Chọn flavour */}
             <div className="mt-4">
-              <span className="font-semibold">Flavour</span>
+              <span className="font-semibold text-[22px]">Flavour</span>
               <p className="text-gray-500">{selectedFlavor}</p>
               <div className="flex flex-wrap gap-3 mt-2">
                 {flavours.map((flavor) => (
@@ -260,7 +260,10 @@ export default function ProductDetail() {
       <div className="">
         <div className="text-center ">
           {' '}
-          <strong className="text-3xl" style={{fontFamily: 'Recoleta, serif'}}>
+          <strong
+            className="text-[30px]"
+            style={{fontFamily: 'Recoleta, serif'}}
+          >
             Reviews & Rating
           </strong>
         </div>
