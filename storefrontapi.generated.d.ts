@@ -1421,6 +1421,7 @@ export type ShopproductsQuery = {
         StorefrontAPI.Product,
         'id' | 'description' | 'createdAt' | 'handle'
       > & {
+          images: {nodes: Array<Pick<StorefrontAPI.Image, 'url'>>};
           category?: StorefrontAPI.Maybe<
             Pick<StorefrontAPI.TaxonomyCategory, 'name' | 'id'>
           >;
@@ -1514,7 +1515,7 @@ interface GeneratedQueryTypes {
     return: ShopproductQuery;
     variables: ShopproductQueryVariables;
   };
-  '#graphql\nquery Shopproducts{\n products(first:10) {\n    nodes{\n      __typename\n      id\n      description\n      createdAt\n      handle\n      category{\n        name\n        id\n      }\n    }\n  }\n}\n': {
+  '#graphql\nquery Shopproducts{\n products(first:10) {\n    nodes{\n      __typename\n      id\n      description\n      createdAt\n    \n      handle\n      images(first:10) {\n        nodes{\n          url\n        }\n      }\n      category{\n        name\n        id\n      }\n    }\n  }\n}\n': {
     return: ShopproductsQuery;
     variables: ShopproductsQueryVariables;
   };

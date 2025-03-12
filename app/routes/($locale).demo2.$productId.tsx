@@ -199,22 +199,22 @@ export default function ProductDetail() {
             <hr className="border-gray-300 my-4" />
             <div className="flex justify-between items-center">
               <strong>KEY FEATURES</strong>
-              <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-                <IconOn />
+              <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+                <IconOn className="w-[15px] h-[15px]" />
               </button>
             </div>
             <hr className="border-gray-300 my-4" />
             <div className="flex justify-between items-center">
               <strong>INGREDIENTS</strong>
-              <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-                <IconOn />
+              <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+                <IconOn className="w-[15px] h-[15px]" />
               </button>
             </div>
             <hr className="border-gray-300 my-4" />
             <div className="border-b py-3 flex justify-between items-center">
               <strong className="text-black">HOW TO USE</strong>
-              <button className="w-6 h-6 flex items-center justify-center bg-green-900 rounded-full">
-                <IconIn />
+              <button className="w-[25px] h-[25px] flex items-center justify-center bg-green-900 rounded-full">
+                <IconIn className="w-[15px] h-[15px]" />
               </button>
             </div>
             <p className="text-gray-600 mt-2 mb-5 w-full max-w-full">
@@ -225,8 +225,8 @@ export default function ProductDetail() {
             <hr className="border-gray-300 my-4" />
             <div className="flex justify-between items-center">
               <strong>QUALITY</strong>
-              <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-                <IconOn />
+              <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+                <IconOn className="w-[15px] h-[15px]" />
               </button>
             </div>
             <hr className="border-gray-300 my-4 mb-5" />
@@ -281,7 +281,7 @@ export default function ProductDetail() {
                         <img
                           src="../../public/image/anh1.jpg"
                           alt="User Avatar"
-                          className="w-[3.5rem] h-[3.5rem] rounded-full object-cover"
+                          className="w-[3.5rem] h-[3.5rem] rounded-full object-cover mt-0"
                         />
                         <div>
                           <p className="font-semibold">Aspen Siphron</p>
@@ -316,7 +316,7 @@ export default function ProductDetail() {
                         <img
                           src="../../public/image/anh2.jpg"
                           alt="User Avatar"
-                          className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover"
+                          className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover mt-0"
                         />
                         <div>
                           <p className="font-semibold">Aspen Siphron</p>
@@ -351,7 +351,7 @@ export default function ProductDetail() {
                         <img
                           src="../../public/image/anh3.jpg"
                           alt="User Avatar"
-                          className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover"
+                          className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover mt-0"
                         />
                         <div>
                           <p className="font-semibold">Aspen Siphron</p>
@@ -390,7 +390,7 @@ export default function ProductDetail() {
                         <img
                           src="../../public/image/anh5.jpg"
                           alt="User Avatar"
-                          className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover"
+                          className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover mt-0"
                         />
                         <div>
                           <p className="font-semibold">Aspen Siphron</p>
@@ -423,7 +423,7 @@ export default function ProductDetail() {
                       <img
                         src="../../public/image/anh6.jpg"
                         alt="User Avatar"
-                        className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover"
+                        className="w-[3.5rem] h-[3.5rem] rounded-full object-cover mt-0"
                       />
                       <div>
                         <p className="font-semibold">Aspen Siphron</p>
@@ -456,7 +456,7 @@ export default function ProductDetail() {
                       <img
                         src="../../public/image/anh7.jpg"
                         alt="User Avatar"
-                        className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover"
+                        className="w-[3.5rem] h-[3.5rem] rounded-full object-cover mt-0"
                       />
                       <div>
                         <p className="font-semibold">Aspen Siphron</p>
@@ -501,8 +501,8 @@ export default function ProductDetail() {
                 Yes, it is a completely safe & FSSAI approved product.
               </p>
             </div>
-            <button className="w-6 h-6 flex items-center justify-center bg-green-900 rounded-full">
-              <IconIn />
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-green-900 rounded-full">
+              <IconIn className="w-[15px] h-[15px]" />
             </button>
           </div>
         </div>
@@ -511,8 +511,8 @@ export default function ProductDetail() {
             <strong className="text-gray-800">
               What is the role of Vitamin C in collagen synthesis?
             </strong>
-            <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-              <IconOn />
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+              <IconOn className="w-[15px] h-[15px]" />
             </button>
           </div>
           <hr className="border-gray-300" />
@@ -522,8 +522,8 @@ export default function ProductDetail() {
             <strong className="text-gray-800">
               How much Vitamin C is needed by the body?
             </strong>
-            <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-              <IconOn />
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+              <IconOn className="w-[15px] h-[15px]" />
             </button>
           </div>
         </div>
@@ -532,8 +532,8 @@ export default function ProductDetail() {
             <strong className="text-gray-800">
               What symptoms indicate Vitamin C deficiency?
             </strong>
-            <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-              <IconOn />
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+              <IconOn className="w-[15px] h-[15px]" />
             </button>
           </div>
           <hr className="border-gray-300" />
@@ -543,8 +543,8 @@ export default function ProductDetail() {
             <strong className="text-gray-800">
               How do I know that I need Vitamin C?
             </strong>
-            <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-              <IconOn />
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+              <IconOn className="w-[15px] h-[15px]" />
             </button>
           </div>
           <hr className="border-gray-300" />
