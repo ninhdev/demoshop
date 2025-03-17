@@ -12,6 +12,11 @@ interface Product {
     name: string;
     id: string;
   };
+  images?: {
+    nodes: {
+      url: string;
+    }[];
+  };
 }
 
 interface ShopProductsData {
@@ -25,11 +30,11 @@ export const loader = async ({
   context: {storefront},
 }: LoaderFunctionArgs) => {
   const data = await storefront.query(SHOPPRODUCT_QUERY);
-  if(!data || !data.products){
-    throw new Response('không có dữ liệu sản phẩm',{status:500})
+  if (!data || !data.products) {
+    throw new Response('không có dữ liệu sản phẩm', {status: 500});
   }
   return json({data});
-}
+};
 
 export default function ShopProducts() {
   const {data} = useLoaderData<typeof loader>();
@@ -42,15 +47,16 @@ export default function ShopProducts() {
   //     ),
   //   );
   // }, [search, data.products.nodes]);
- const [search,setSearch]=useState('');
- const [filterProducts,setFilterProducts]=useState(data.products.nodes);
- useEffect(()=>{
-  setFilterProducts(
-    data.products.nodes.filter((product)=>
-      product.description.toLowerCase().includes(search.toLocaleLowerCase())
-    )
-  )
- },[search,data.products.nodes])
+  const [search, setSearch] = useState('');
+  const [filterProducts, setFilterProducts] = useState(data.products.nodes);
+  useEffect(() => {
+    setFilterProducts(
+      data.products.nodes.filter((product) =>
+        product.description.toLowerCase().includes(search.toLocaleLowerCase()),
+      ),
+    );
+  }, [search, data.products.nodes]);
+
   return (
     <div>
       <h1>Danh sách sản phẩm</h1>
@@ -66,6 +72,25 @@ export default function ShopProducts() {
           <h2>{product.__typename}</h2>
           <p>
             <strong>ID:</strong> {product.id}
+          </p>
+          <p>
+            <strong>Ảnh:</strong>{' '}
+            {product.images?.nodes.length
+              ? product.images.nodes.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image.url}
+                    alt={`Hình ảnh sản phẩm ${product.id}`}
+                    style={{
+                      width: '80px',
+                      height: '80px',
+                      objectFit: 'cover',
+                      marginRight: '10px',
+                      borderRadius: '5px',
+                    }}
+                  />
+                ))
+              : 'Không có hình ảnh'}
           </p>
           <p>
             <strong>Mô tả:</strong> {product.description || 'Không có mô tả'}
@@ -99,7 +124,13 @@ query Shopproducts{
       id
       description
       createdAt
+    
       handle
+      images(first:10) {
+        nodes{
+          url
+        }
+      }
       category{
         name
         id

@@ -1,15 +1,11 @@
 import {json, useLoaderData} from '@remix-run/react';
 import {LoaderFunction} from '@remix-run/node';
 import {useRef, useState} from 'react';
-import {
-  IconFrame1,
-  IconHeart,
-  IconIn,
-  IconLeft,
-  IconOn,
-  IconRight,
-  IconV,
-} from '~/components/Icon';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+import {IconFrame1, IconHeart, IconIn, IconOn, IconV} from '~/components/Icon';
+import EmblaCarousel from '~/components/EmblaCarrousel';
 
 interface Product {
   id: number;
@@ -62,68 +58,31 @@ export default function ProductDetail() {
   //mũi tên trái phải ảnh
   const [selectedIndex, setSelectedIndex] = useState(0);
   const images = product.images;
-
-  const handlePrev = () => {
-    setSelectedIndex((prevIndex) => {
-      const newIndex = prevIndex === 0 ? images.length - 1 : prevIndex - 1;
-      setSelectedImage(images[newIndex]);
-      return newIndex;
-    });
-  };
-
-  const handleNext = () => {
-    setSelectedIndex((prevIndex) => {
-      const newIndex = prevIndex === images.length - 1 ? 0 : prevIndex + 1;
-      setSelectedImage(images[newIndex]);
-      return newIndex;
-    });
-  };
   //
   const [activeTab, setActiveTab] = useState('Details');
   const tabs = ['Details', 'Packaging', 'Shipping details'];
+
   return (
     <div className="container">
       <div className="w-full flex justify-center">
         <div className="mx-auto p-6 bg-white rounded-lg flex flex-col sm:flex-col md:flex-row gap-8 mt-10 justify-center">
-          {/* ảnh sản phẩm */}
+          {/* c1:ảnh sản phẩm */}
           <div className="w-full md:w-1/2">
-            <img
-              src={selectedImage}
-              alt={product.title}
-              className="w-full md:w-[500px] h-[440px] object-cover rounded-lg"
-            />
-            <div className="flex gap-2 justify-center">
-              <button onClick={handlePrev}>
-                <IconLeft className="w-6 h-6 text-gray-500" />
-              </button>
-              {product.images.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt="thumbnail"
-                  className={`rounded-lg cursor-pointer border w-[80px] md:w-[120px] h-[80px] md:h-[100px] mt-5 gap-7 ${
-                    selectedImage === img ? 'border-green-500' : ''
-                  }`}
-                  onClick={() => setSelectedImage(img)}
-                />
-              ))}
-              <button onClick={handleNext}>
-                <IconRight className="w-6 h-6 text-gray-500" />
-              </button>
-            </div>
+            <EmblaCarousel slides={product.images} />
           </div>
+
           {/* ảnh, giá */}
           <div className="w-full md:w-1/2">
             <p
-              className="text-2xl md:text-3xl font-bold"
+              className="text-[2.5rem] md:text-[35px] font-bold"
               style={{fontFamily: 'Recoleta, serif'}}
             >
               {product.title}
             </p>
-            <p className="text-md md:text-lg font-semibold text-gray-500 mt-5">
+            <p className="text-[2rem] font-semibold text-gray-500 mt-5">
               ⭐ {product.rating} (288 reviews)
             </p>
-            <p className="text-xl md:text-2xl font-bold text-green-600 mt-5">
+            <p className="text-[2.5rem] md:text-[2.5rem] font-bold text-green-600 mt-5">
               ${product.price}
             </p>
             <hr className="border-gray-300 my-4" />
@@ -132,7 +91,7 @@ export default function ProductDetail() {
 
             {/* Chọn flavour */}
             <div className="mt-4">
-              <span className="font-semibold text-lg">Flavour</span>
+              <span className="font-semibold text-[22px]">Flavour</span>
               <p className="text-gray-500">{selectedFlavor}</p>
               <div className="flex flex-wrap gap-3 mt-2">
                 {flavours.map((flavor) => (
@@ -165,11 +124,13 @@ export default function ProductDetail() {
                   <div className="relative flex px-4 py-2 bg-gray-100 rounded-lg">
                     <select
                       ref={selectRef}
-                      className="bg-gray-100 appearance-none outline-none cursor-pointer pr-6 border-none w-full"
+                      className="bg-gray-100 appearance-none outline-none cursor-pointer pr-6 border-none w-full text-[20px]"
                       value={selectedSize}
                       onChange={(e) => setSelectedSize(e.target.value)}
                     >
-                      <option value="100ml">100ml</option>
+                      <option value="100ml" className="">
+                        100ml
+                      </option>
                       <option value="200ml">200ml</option>
                       <option value="500ml">500ml</option>
                     </select>
@@ -206,14 +167,14 @@ export default function ProductDetail() {
             <div className="flex flex-wrap gap-7">
               <div className="mt-5 flex gap-3 w-full sm:w-auto">
                 <IconHeart className="two text-white stroke-black fill-white" />
-                <strong className="text-sm">Add to wishlist</strong>
+                <strong className="">Add to wishlist</strong>
               </div>
 
-              <div className="mt-1 flex items-center gap-3 w-full sm:w-auto">
-                <div className="w-6 h-6 flex items-center justify-center bg-red-100 rounded-full">
-                  <IconV className="w-4 h-4 text-red-500" />
+              <div className="mt-3 flex items-center gap-3 w-full sm:w-auto">
+                <div className="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mt-1">
+                  <IconV className="w-6 h-6 text-red-500" />
                 </div>
-                <strong className="text-black text-sm">
+                <strong className="text-black mt-1 ">
                   30 days money back guarantee
                 </strong>
               </div>
@@ -234,29 +195,29 @@ export default function ProductDetail() {
                 </button>
               ))}
             </div>
-            <hr className="border-gray-300 my-4" />
+
             <hr className="border-gray-300 my-4" />
             <div className="flex justify-between items-center">
               <strong>KEY FEATURES</strong>
-              <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-                <IconOn />
+              <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+                <IconOn className="w-[15px] h-[15px]" />
               </button>
             </div>
             <hr className="border-gray-300 my-4" />
             <div className="flex justify-between items-center">
               <strong>INGREDIENTS</strong>
-              <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-                <IconOn />
+              <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+                <IconOn className="w-[15px] h-[15px]" />
               </button>
             </div>
             <hr className="border-gray-300 my-4" />
             <div className="border-b py-3 flex justify-between items-center">
               <strong className="text-black">HOW TO USE</strong>
-              <button className="w-6 h-6 flex items-center justify-center bg-green-900 rounded-full">
-                <IconIn />
+              <button className="w-[25px] h-[25px] flex items-center justify-center bg-green-900 rounded-full">
+                <IconIn className="w-[15px] h-[15px]" />
               </button>
             </div>
-            <p className="text-gray-600 text-sm mt-2 mb-5 w-full max-w-full">
+            <p className="text-gray-600 mt-2 mb-5 w-full max-w-full">
               Using vitamin C supplements effectively involves understanding the
               appropriate dosage, the form that best suits your needs, and the
               timing of intake. Here are some guidelines.
@@ -264,8 +225,8 @@ export default function ProductDetail() {
             <hr className="border-gray-300 my-4" />
             <div className="flex justify-between items-center">
               <strong>QUALITY</strong>
-              <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-                <IconOn />
+              <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+                <IconOn className="w-[15px] h-[15px]" />
               </button>
             </div>
             <hr className="border-gray-300 my-4 mb-5" />
@@ -299,7 +260,10 @@ export default function ProductDetail() {
       <div className="">
         <div className="text-center ">
           {' '}
-          <strong className="text-3xl" style={{fontFamily: 'Recoleta, serif'}}>
+          <strong
+            className="text-[30px]"
+            style={{fontFamily: 'Recoleta, serif'}}
+          >
             Reviews & Rating
           </strong>
         </div>
@@ -309,7 +273,7 @@ export default function ProductDetail() {
             <div className="flex justify-center gap-5 mt-10 mb-10 flex-wrap md:flex-nowrap">
               <div className="">
                 {' '}
-                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm">
+                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm-[35rem]">
                   <div>
                     {/* Header */}
                     <div className="flex items-center justify-between">
@@ -317,11 +281,11 @@ export default function ProductDetail() {
                         <img
                           src="../../public/image/anh1.jpg"
                           alt="User Avatar"
-                          className="w-10 h-10 rounded-full object-cover"
+                          className="w-[3.5rem] h-[3.5rem] rounded-full object-cover mt-0"
                         />
                         <div>
                           <p className="font-semibold">Aspen Siphron</p>
-                          <p className="text-sm text-gray-500">May 12, 2024</p>
+                          <p className=" text-gray-500">May 12, 2024</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-1">
@@ -344,7 +308,7 @@ export default function ProductDetail() {
               {/* review2 */}
               <div className="">
                 {' '}
-                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm">
+                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm-[35rem]">
                   <div>
                     {/* Header */}
                     <div className="flex items-center justify-between">
@@ -352,11 +316,11 @@ export default function ProductDetail() {
                         <img
                           src="../../public/image/anh2.jpg"
                           alt="User Avatar"
-                          className="w-10 h-10 rounded-full object-cover"
+                          className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover mt-0"
                         />
                         <div>
                           <p className="font-semibold">Aspen Siphron</p>
-                          <p className="text-sm text-gray-500">May 12, 2024</p>
+                          <p className=" text-gray-500">May 12, 2024</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-1">
@@ -379,7 +343,7 @@ export default function ProductDetail() {
               {/* review3 */}
               <div className="">
                 {' '}
-                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm">
+                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm-[35rem]">
                   <div>
                     {/* Header */}
                     <div className="flex items-center justify-between">
@@ -387,11 +351,11 @@ export default function ProductDetail() {
                         <img
                           src="../../public/image/anh3.jpg"
                           alt="User Avatar"
-                          className="w-10 h-10 rounded-full object-cover"
+                          className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover mt-0"
                         />
                         <div>
                           <p className="font-semibold">Aspen Siphron</p>
-                          <p className="text-sm text-gray-500">May 12, 2024</p>
+                          <p className=" text-gray-500">May 12, 2024</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-1">
@@ -418,7 +382,7 @@ export default function ProductDetail() {
             <div className="flex justify-center gap-5 mt-10 mb-10 flex-wrap md:flex-nowrap">
               <div className="">
                 {' '}
-                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm">
+                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm-[35rem]">
                   <div>
                     {/* Header */}
                     <div className="flex items-center justify-between">
@@ -426,11 +390,11 @@ export default function ProductDetail() {
                         <img
                           src="../../public/image/anh5.jpg"
                           alt="User Avatar"
-                          className="w-10 h-10 rounded-full object-cover"
+                          className="w-[3.5rem] h-[3.5rem]  rounded-full object-cover mt-0"
                         />
                         <div>
                           <p className="font-semibold">Aspen Siphron</p>
-                          <p className="text-sm text-gray-500">May 12, 2024</p>
+                          <p className=" text-gray-500">May 12, 2024</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-1">
@@ -451,7 +415,7 @@ export default function ProductDetail() {
                 </div>
               </div>
               {/* review2 */}{' '}
-              <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm">
+              <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm-[35rem]">
                 <div>
                   {/* Header */}
                   <div className="flex items-center justify-between">
@@ -459,11 +423,11 @@ export default function ProductDetail() {
                       <img
                         src="../../public/image/anh6.jpg"
                         alt="User Avatar"
-                        className="w-10 h-10 rounded-full object-cover"
+                        className="w-[3.5rem] h-[3.5rem] rounded-full object-cover mt-0"
                       />
                       <div>
                         <p className="font-semibold">Aspen Siphron</p>
-                        <p className="text-sm text-gray-500">May 12, 2024</p>
+                        <p className=" text-gray-500">May 12, 2024</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
@@ -485,18 +449,18 @@ export default function ProductDetail() {
               {/* review3 */}
               <div className="">
                 {' '}
-                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm">
+                <div className="border rounded-xl p-4 shadow-md bg-white max-w-sm-[35rem]">
                   {/* Header */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <img
                         src="../../public/image/anh7.jpg"
                         alt="User Avatar"
-                        className="w-10 h-10 rounded-full object-cover"
+                        className="w-[3.5rem] h-[3.5rem] rounded-full object-cover mt-0"
                       />
                       <div>
                         <p className="font-semibold">Aspen Siphron</p>
-                        <p className="text-sm text-gray-500">May 12, 2024</p>
+                        <p className=" text-gray-500">May 12, 2024</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
@@ -520,66 +484,71 @@ export default function ProductDetail() {
         </div>
       </div>
       {/* Want to know more? */}
-      <div className="text-center mt-10 ">
-        <strong className="text-3xl" style={{fontFamily: 'Recoleta, serif'}}>
-          Want to know more?
-        </strong>
-      </div>
-      <div className="flex flex-col items-center">
-        <div className="border-b py-3 flex justify-between items-center w-full max-w-[600px]">
-          <div className="flex-1">
-            <strong className="text-black">01. Is it safe?</strong>
-            <p className="text-gray-600 text-sm mt-2 mb-5">
-              Yes, it is a completely safe & FSSAI approved product.
-            </p>
+      <div className="">
+        <div className="text-center mt-10 ">
+          <strong
+            className="text-[3rem]"
+            style={{fontFamily: 'Recoleta, serif'}}
+          >
+            Want to know more?
+          </strong>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="border-b py-3 flex justify-between items-center w-full max-w-[600px]">
+            <div className="flex-1">
+              <strong className="text-black">01. Is it safe?</strong>
+              <p className="text-gray-600 mt-2 mb-5">
+                Yes, it is a completely safe & FSSAI approved product.
+              </p>
+            </div>
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-green-900 rounded-full">
+              <IconIn className="w-[15px] h-[15px]" />
+            </button>
           </div>
-          <button className="w-6 h-6 flex items-center justify-center bg-green-900 rounded-full">
-            <IconIn />
-          </button>
         </div>
-      </div>
-      <div className="max-w-[600px] mx-auto">
-        <div className="flex justify-between items-center py-2">
-          <strong className="text-gray-800">
-            What is the role of Vitamin C in collagen synthesis?
-          </strong>
-          <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-            <IconOn />
-          </button>
+        <div className="max-w-[600px] mx-auto">
+          <div className="flex justify-between items-center py-2">
+            <strong className="text-gray-800">
+              What is the role of Vitamin C in collagen synthesis?
+            </strong>
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+              <IconOn className="w-[15px] h-[15px]" />
+            </button>
+          </div>
+          <hr className="border-gray-300" />
         </div>
-        <hr className="border-gray-300" />
-      </div>
-      <div className="max-w-[600px] mx-auto">
-        <div className="flex justify-between items-center py-2">
-          <strong className="text-gray-800">
-            How much Vitamin C is needed by the body?
-          </strong>
-          <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-            <IconOn />
-          </button>
+        <div className="max-w-[600px] mx-auto">
+          <div className="flex justify-between items-center py-2">
+            <strong className="text-gray-800">
+              How much Vitamin C is needed by the body?
+            </strong>
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+              <IconOn className="w-[15px] h-[15px]" />
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="max-w-[600px] mx-auto">
-        <div className="flex justify-between items-center py-2">
-          <strong className="text-gray-800">
-            What symptoms indicate Vitamin C deficiency?
-          </strong>
-          <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-            <IconOn />
-          </button>
+        <div className="max-w-[600px] mx-auto">
+          <div className="flex justify-between items-center py-2">
+            <strong className="text-gray-800">
+              What symptoms indicate Vitamin C deficiency?
+            </strong>
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+              <IconOn className="w-[15px] h-[15px]" />
+            </button>
+          </div>
+          <hr className="border-gray-300" />
         </div>
-        <hr className="border-gray-300" />
-      </div>
-      <div className="max-w-[600px] mx-auto mb-10">
-        <div className="flex justify-between items-center py-2">
-          <strong className="text-gray-800">
-            How do I know that I need Vitamin C?
-          </strong>
-          <button className="w-6 h-6 flex items-center justify-center bg-white rounded-full border border-gray-300">
-            <IconOn />
-          </button>
+        <div className="max-w-[600px] mx-auto mb-10">
+          <div className="flex justify-between items-center py-2">
+            <strong className="text-gray-800">
+              How do I know that I need Vitamin C?
+            </strong>
+            <button className="w-[25px] h-[25px] flex items-center justify-center bg-white rounded-full border border-gray-300">
+              <IconOn className="w-[15px] h-[15px]" />
+            </button>
+          </div>
+          <hr className="border-gray-300" />
         </div>
-        <hr className="border-gray-300" />
       </div>
     </div>
   );

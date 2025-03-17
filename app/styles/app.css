@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 @font-face {
-  font-family: "Recoleta";
-  src: url("/fonts/Recoleta-Regular.woff2") format("woff2"),
-       url("/fonts/Recoleta-Regular.woff") format("woff");
+  font-family: 'Recoleta';
+  src: url('/fonts/Recoleta-Regular.woff2') format('woff2'),
+    url('/fonts/Recoleta-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -219,10 +219,10 @@ h1 {
 }
 li {
   border-radius: 12px;
-  margin: 25px;
+  /* margin: 25px; */
   padding: 20px;
   width: 305px;
-  height: 488px;
+  height: 388px;
   text-align: center;
   transition: transform 0.2s;
 
@@ -230,7 +230,7 @@ li {
 }
 h2 {
   color: black;
-  margin: 10px 0;
+  /* margin: 10px 0; */
   font-size: 20px;
 }
 
