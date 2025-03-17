@@ -1,7 +1,7 @@
 import {Link, useParams} from '@remix-run/react';
 import React, {useEffect, useState} from 'react';
 import {IconFrame, IconHeart} from '~/components/Icon';
-import {ChevronLeft, ChevronRight} from 'lucide-react';
+
 interface Product {
   id: number;
   title: string;
@@ -61,7 +61,7 @@ const Products: React.FC = () => {
     <div className="container">
       <div className="main">
         <div className="bg-gradient-to-r from-purple-100 to-blue-200 text-white text-center p-8 rounded-lg mb-6 flex flex-col md:flex-row">
-          <div className="mt-20">
+          <div className="mt-[11rem]">
             <h1 className="text-5xl font-bold mr-auto">
               Giảm tới 50% cho các sản phẩm <br /> Tai nghe được chọn
             </h1>
@@ -133,20 +133,18 @@ const Products: React.FC = () => {
             </Link>
             <div className="flex justify-center items-center text-center gap-7">
               <h2 className="line-clamp-1">{product.title}</h2>
-              <p className="price text-xl">${product.price}</p>
+              <p className="price">${product.price}</p>
             </div>
 
             <p className="line-clamp-1">{product.description}</p>
 
-            <p className="rating text-xl mt-3" style={{marginLeft: '-87px'}}>
-              {product.rating}★
-            </p>
+            <p className="rating mt-3">{product.rating}★</p>
 
             <div className="flex gap-2 mt-5 bottom-6 pl-[11px] pr-[11px]">
-              <button className="w-full h-[36px] text-white rounded-2xl flex items-center justify-center px-2 text-sm whitespace-nowrap hover:bg-blue-800 bg-[#3A4980]">
+              <button className="w-full h-[36px] text-white rounded-2xl flex items-center justify-center px-2  whitespace-nowrap hover:bg-blue-800 bg-[#3A4980]">
                 Thêm vào giỏ
               </button>
-              <button className="w-full h-[36px] text-black rounded-2xl flex items-center justify-center px-2 text-sm whitespace-nowrap bg-[#FFFFFF] hover:bg-pink-100 border border-gray-300">
+              <button className="w-full h-[36px] text-black rounded-2xl flex items-center justify-center px-2 whitespace-nowrap bg-[#FFFFFF] hover:bg-pink-100 border border-gray-300">
                 Thêm vào danh sách
               </button>
             </div>

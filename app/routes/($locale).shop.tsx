@@ -19,16 +19,12 @@ export const loader = async ({
   context: {storefront},
 }: LoaderFunctionArgs) => {
   const data = await storefront.query(PRODUCTS_QUERY);
-
   return json({data});
 };
 
 export default function ProductsPage() {
   const {data} = useLoaderData<typeof loader>();
   console.log(data);
-
-  // return null;
-
   return (
     <div>
       <h1>danh sách sản phẩm</h1>
@@ -76,3 +72,42 @@ const PRODUCTS_QUERY = `#graphql
     }
   }
 `;
+
+  products(first: 20) {
+  nodes {
+    id
+  title
+  publishedAt
+  handle
+  vendor
+  variants(first: 1) {
+    nodes {
+      id
+      availableForSale
+      image {
+        url
+        altText
+        width
+        height
+      }
+      price {
+        amount
+        currencyCode
+      }
+      compareAtPrice {
+        amount
+        currencyCode
+      }
+      selectedOptions {
+        name
+        value
+      }
+      product {
+        handle
+        title
+      }
+    }
+  }
+  }
+}
+`
