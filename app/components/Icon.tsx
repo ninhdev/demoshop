@@ -58,6 +58,156 @@ export function IconClose(props: IconProps) {
   );
 }
 
+export function IconHeart(props: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="26"
+      height="26"
+      viewBox="0 0 26 26"
+      {...props}
+    >
+      <path
+        d="M22.1763 5.51296C21.6519 4.98834 21.0293 4.57217 20.344 4.28823C19.6588 4.0043 18.9243 3.85815 18.1825 3.85815C17.4408 3.85815 16.7063 4.0043 16.021 4.28823C15.3358 4.57217 14.7132 4.98834 14.1888 5.51296L13.1005 6.60123L12.0123 5.51296C10.9531 4.45376 9.51648 3.8587 8.01854 3.8587C6.5206 3.8587 5.08401 4.45376 4.0248 5.51296C2.9656 6.57217 2.37054 8.00875 2.37054 9.50669C2.37054 11.0046 2.9656 12.4412 4.0248 13.5004L5.11307 14.5887L13.1005 22.5762L21.088 14.5887L22.1763 13.5004C22.7009 12.9761 23.1171 12.3535 23.401 11.6682C23.6849 10.9829 23.8311 10.2484 23.8311 9.50669C23.8311 8.76494 23.6849 8.03045 23.401 7.3452C23.1171 6.65994 22.7009 6.03734 22.1763 5.51296V5.51296Z"
+        stroke="inherit"
+        fill="inherit"
+        strokeWidth="2.156"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+export function IconV(props: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="13"
+      height="11"
+      viewBox="0 0 13 11"
+      fill="none"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M11.098 0.390159L3.93797 7.30016L2.03797 5.27016C1.68797 4.94016 1.13797 4.92016 0.737968 5.20016C0.347968 5.49016 0.237968 6.00016 0.477968 6.41016L2.72797 10.0702C2.94797 10.4102 3.32797 10.6202 3.75797 10.6202C4.16797 10.6202 4.55797 10.4102 4.77797 10.0702C5.13797 9.60016 12.008 1.41016 12.008 1.41016C12.908 0.490159 11.818 -0.31984 11.098 0.380159V0.390159Z"
+        fill="#EB5930"
+      />
+    </svg>
+  );
+}
+export function IconDot(props: any) {
+  return (
+    <svg className="embla__dot" viewBox="0 0 24 24">
+      <circle
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="gray"
+        stroke-width="2"
+        fill="none"
+      />
+    </svg>
+  );
+}
+export function IconFrame({props}: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="25"
+      viewBox="0 0 14 15"
+      fill="none"
+    >
+      <path
+        d="M11.375 5.3125L7 9.6875L2.625 5.3125"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+      <path
+        d="M11.375 5.3125L7 9.6875L2.625 5.3125"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
+export function IconRight({props}: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="21"
+      viewBox="0 0 20 21"
+      fill="none"
+    >
+      <path
+        d="M12.0249 5.44167L17.0832 10.5L12.0249 15.5583"
+        stroke="#1D2939"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M2.91675 10.5H16.9417"
+        stroke="#1D2939"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
+export function IconLeft({props}: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="21"
+      viewBox="0 0 20 21"
+      fill="none"
+      className=""
+    >
+      <path
+        d="M7.9751 15.5583L2.91676 10.5L7.9751 5.44167"
+        stroke="#1D2939"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M17.0835 10.5L3.0585 10.5"
+        stroke="#1D2939"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
+export function IconFrame1({props}: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className="w-5 h-5 text-gray-500"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  );
+}
 export function IconArrow({direction = 'right'}: IconProps) {
   let rotate;
 
@@ -83,6 +233,36 @@ export function IconArrow({direction = 'right'}: IconProps) {
       <title>Arrow</title>
       <path d="M7 3L14 10L7 17" strokeWidth="1.25" />
     </Icon>
+  );
+}
+export function IconIn({props}: any) {
+  return (
+    <svg
+      className="w-4 h-4 text-white"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path
+        fillRule="evenodd"
+        d="M5 12a1 1 0 011-1h12a1 1 0 110 2H6a1 1 0 01-1-1z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+export function IconOn({props}: any) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-5 h-5 text-black"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+    </svg>
   );
 }
 

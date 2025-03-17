@@ -16,12 +16,14 @@ export default async function handleRequest(
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
+    defaultSrc: ['self', '*'],
     scriptSrc: [
       'self',
       'https://cdn.shopify.com',
       'https://shopify.com',
       'https://www.google-analytics.com',
       'https://www.googletagmanager.com',
+
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
 
     ],
@@ -32,6 +34,7 @@ export default async function handleRequest(
       'https://cdn.dummyjson.com', 
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
+    connectSrc: ['https://dummyjson.com'],
   });
 
   const body = await renderToReadableStream(
