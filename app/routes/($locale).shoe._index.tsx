@@ -309,6 +309,7 @@ const BannerSlider = () => {
 };
 
 export default BannerSlider;
+
 const SHOE_QUERY = `#graphql
 query Shoe {
   products(first: 50) {

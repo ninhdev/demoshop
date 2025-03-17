@@ -142,7 +142,7 @@ const Products: React.FC = () => {
         {products.slice(0, 12).map((product) => (
           <li
             key={product.id}
-            className="flex flex-col pt-0 pr-0 pl-0 border border-solid border-gray-300"
+            className="flex flex-col pt-0 pr-0 pl-0 border border-solid border-gray-300 w-full"
           >
             <Link to={`/${locale}/demo2/${product.id}`}>
               <div className="relative" style={{color: '#F7F5F7'}}>
@@ -191,8 +191,8 @@ const Products: React.FC = () => {
           controls
         ></video>
       </div>
-      {/* silde sản phẩm */}
-      {/* <div className="">
+
+      <div className="relative">
         <Swiper
           modules={[Navigation, Autoplay, Pagination]}
           spaceBetween={20}
@@ -208,7 +208,7 @@ const Products: React.FC = () => {
           }}
           className="my-4"
         >
-          {products.slice(0, 8).map((product) => (
+          {products.map((product) => (
             <SwiperSlide key={product.id}>
               <div className="p-4 border border-gray-200 rounded-lg shadow-lg">
                 <Link to={`/${locale}/demo2/${product.id}`}>
@@ -218,19 +218,30 @@ const Products: React.FC = () => {
                     className="object-cover w-full h-[200px] rounded-lg"
                   />
                 </Link>
-                <h2 className="text-center mt-2">{product.title}</h2>
-                <p className="text-center text-gray-600">${product.price}</p>
+                <div className="flex justify-between items-center">
+                  {' '}
+                  <p className="text-center text-gray-900">
+                    {product.category}
+                  </p>
+                  <p className="text-center text-red-600">${product.price}</p>
+                </div>
+                <h2 className="text-center mt-2 line-clamp-1">
+                  {product.title}
+                </h2>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
-        <button className="custom-prev absolute left-0 z-10">
+
+        {/* Các nút điều hướng */}
+        <button className="custom-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md">
           <ChevronLeft size={24} />
         </button>
-        <button className="custom-next absolute right-0 z-10">
+        <button className="custom-next absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md">
           <ChevronRight size={24} />
         </button>
-      </div> */}
+      </div>
+
       {/* brands */}
       <div className="grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid gap-4 md:gap-6 items-center p-0">
         {brands.map((brand, index) => (
